@@ -2,7 +2,7 @@
  * Copyright (c) 2018  Thiago Lopes da Silva
  * All Rights Reserved.
  */
-const property = new (require("./wordParser"))()
+const property = new (require("./parser/wordParser"))()
 
 /**
  * Main execution

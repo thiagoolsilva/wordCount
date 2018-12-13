@@ -3,9 +3,9 @@
  * All Rights Reserved.
  */
 
-const moduleFileManager = require("./fileManager"),
-    propertyManager = new (require("./propertyManager"))(),
-    constants = require("./constants");
+const moduleFileManager = require("../utils/fileManager"),
+    propertyManager = new (require("../utils/propertyManager"))(),
+    constants = require("../utils/constants");
 
 /**
  * This class is used to parse the provided stream

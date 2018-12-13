@@ -3,7 +3,7 @@
  * All Rights Reserved.
  */
 
-const propertiesReader = require('properties-reader')("./configuration.properties")
+const propertiesReader = require('properties-reader')("./config/configuration.properties")
 
 /**
  * This class will manage all values of property file
