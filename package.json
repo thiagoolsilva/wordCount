@@ -1,0 +1,16 @@
+{
+  "name": "wordgroupcount",
+  "version": "1.0.0",
+  "description": "This is a very simple program that returns the sum of words found on the provided stream .",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thiago Lopes da Silva",
+  "license": "Copyright (c) 2018  Thiago Lopes da SilvaSC",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "properties-reader": "0.0.16",
+    "underscore": "^1.9.1"
+  }
+}
