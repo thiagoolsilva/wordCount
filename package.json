@@ -1,16 +1,23 @@
 {
   "name": "wordgroupcount",
-  "version": "1.0.0",
-  "description": "This is a very simple program that returns the sum of words found on the provided stream .",
+  "version": "1.0.1",
+  "description": "This program will run an specific algorith using the provided text",
   "main": "index.js",
   "scripts": {
+    "build" : "tsc ",
+    "start" : "node ./build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Thiago Lopes da Silva",
-  "license": "Copyright (c) 2018  Thiago Lopes da SilvaSC",
+  "license": "Copyright (c) 2019  Thiago Lopes da Silva",
   "dependencies": {
     "fs": "0.0.1-security",
     "properties-reader": "0.0.16",
-    "underscore": "^1.9.1"
+    "underscore": "^1.9.1",
+    "@types/node": "^11.13.7",
+    "@types/properties-reader": "0.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^3.4.5"
   }
 }
