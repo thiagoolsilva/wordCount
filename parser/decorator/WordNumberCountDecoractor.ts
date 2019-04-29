@@ -3,17 +3,15 @@
  * All Rights Reserved.
  */
 
-import { BaseTextParse } from "../BaseTextParse";
 import { RawText } from "./RawText";
 import { ConfigManager } from "../../config/ConfigManager";
 import { SPACE_STRING, LENGTH_INT_0, EMPTY_STRING } from "../../utils/constants";
+import { TextDecorator } from "./TextDecorator";
 
-export class WordNumberCountDecoractor implements BaseTextParse {
+export class WordNumberCountDecoractor extends TextDecorator {
 
-    private rawText: RawText;
-
-    constructor(rawText: RawText) {
-        this.rawText = rawText;
+    constructor(rawText:RawText){
+        super(rawText);
     }
 
     parse(): string {

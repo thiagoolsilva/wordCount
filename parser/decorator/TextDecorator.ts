@@ -4,12 +4,18 @@
  */
 
 import { BaseTextParse } from "../BaseTextParse";
-import { EMPTY_STRING } from "../../utils/constants";
+import { RawText } from "./RawText";
 
-export class TextDecorator implements BaseTextParse {
+export abstract class TextDecorator implements BaseTextParse {
 
+    protected rawText: RawText;
+
+    constructor(rawText: RawText) {
+        this.rawText = rawText;
+    }
+    
     parse(): string {
-        return EMPTY_STRING;
+        return this.rawText.text;
     }
 
 }
