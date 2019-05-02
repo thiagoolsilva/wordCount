@@ -1,7 +1,7 @@
 {
   "name": "wordgroupcount",
   "version": "1.0.1",
-  "description": "This program will run an specific algorith using the provided text",
+  "description": "Tool to count words in Scientific papers",
   "main": "index.js",
   "scripts": {
     "development": "tsc -W",
