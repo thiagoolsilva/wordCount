@@ -3,55 +3,47 @@
  * All Rights Reserved.
  */
 
-import { ConfigUtil } from "./ConfigUtil";
 import { ISourceReader } from "../source/ISourceReader";
-import { BaseTextParse } from "../parser/BaseTextParse";
-import { SourceFactory } from "../source/SourceFactory";
+import { IExtractBibRegex } from "../bibtext/IExtractBibRegex";
+import { LENGTH_INT_0, COMMA_STRING } from "../utils/constants";
 import { TextFactory } from "../parser/TextFactory";
-import { PATTERN_PARAMETER, FILEPATH_PARAMETER, TYPE_PARAMETER, ALGORITH_PARAMETER } from "../utils/constants";
 
 export class ConfigManager {
-    static instance: ConfigManager;
 
-    pattern?: string;
-    filePath?: string;
-    baseParse?: BaseTextParse;
-    private source?: ISourceReader;
+    private bibTextManager: IExtractBibRegex;
+    private sourceReader: ISourceReader;
 
-    static getInstance(): ConfigManager {
-        if (!ConfigManager.instance) {
-            ConfigManager.instance = new ConfigManager();
-        }
-        return ConfigManager.instance;
+    constructor(bibTextManager: IExtractBibRegex, sourceReader: ISourceReader) {
+        this.bibTextManager = bibTextManager;
+        this.sourceReader = sourceReader;
     }
 
-    async setup() {
-        let propertyManager = new ConfigUtil();
+    async startParse(algorithType: string, bibFilePath: string): Promise<any> {
+        // configure all keywords properties found by provided bibtext file
+        await this.configureKeywordsFile(bibFilePath);
 
-        this.pattern = this.getPatternConfig(propertyManager);
-        this.filePath = this.getFilePathConfig(propertyManager);
-        this.source = this.getSourceType(propertyManager);
-        this.baseParse = await this.getTextAlgorith(propertyManager);
+        // Execute the parse algorithm
+        let rawData = await this.sourceReader.rawStream();
+        let algorith = TextFactory.createFactory(algorithType, rawData);
+        let algorithmResult = algorith.parse();
+
+        // delete the cache file
+        this.sourceReader.deleteFile();
+
+        // return the algoritm result to client
+        return algorithmResult ? algorithmResult : "No word found by provided file";
     }
 
-    getPatternConfig(propertyManager: ConfigUtil): string {
-        return propertyManager.getStringPropertyValue(PATTERN_PARAMETER);
-    }
+    private async configureKeywordsFile(bibFilePath: string) {
+        let rawData = await this.sourceReader.rawStream(bibFilePath);
+        let keywords = this.bibTextManager.extractKeywordWords(rawData);
 
-    getFilePathConfig(propertyManager: ConfigUtil): string {
-        return propertyManager.getStringPropertyValue(FILEPATH_PARAMETER);
-    }
-
-    getSourceType(propertyManager: ConfigUtil): ISourceReader | undefined {
-        const typeParameter = propertyManager.getStringPropertyValue(TYPE_PARAMETER);
-        return SourceFactory.createFactory(typeParameter);
-    }
-
-    async getTextAlgorith(propertyManager: ConfigUtil): Promise<BaseTextParse | undefined> {
-        if (this.source && this.filePath) {
-            const rawText = await this.source.rawStream(this.filePath);
-            const typeParameter = propertyManager.getStringPropertyValue(ALGORITH_PARAMETER);
-            return TextFactory.createFactory(typeParameter, rawText);
+        //save extracted keywords to temp file
+        if (keywords && keywords.length > LENGTH_INT_0) {
+            for (let count = LENGTH_INT_0; count < keywords.length; count++) {
+                await this.sourceReader.writteToFile(keywords[count]);
+                await this.sourceReader.writteToFile(COMMA_STRING);
+            }
         }
     }
 

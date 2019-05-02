@@ -4,5 +4,7 @@
  */
 
 export interface ISourceReader {
-     rawStream(parameters:string) : Promise<string>;
+     deleteFile(filePath?:string):void;
+     rawStream(filePath?:string) : Promise<string>;
+     writteToFile(data:string, filepath?: string):void;
 }

@@ -4,8 +4,7 @@
  */
 
 import { RawText } from "./RawText";
-import { ConfigManager } from "../../config/ConfigManager";
-import { LENGTH_INT_0, SPACE_STRING, EMPTY_STRING } from "../../utils/constants";
+import { LENGTH_INT_0, EMPTY_STRING, COMMA_STRING } from "../../utils/constants";
 import { TextDecorator } from "./TextDecorator";
 
 export class WordTextCountDecorator extends TextDecorator {
@@ -15,12 +14,9 @@ export class WordTextCountDecorator extends TextDecorator {
     }
 
     parse(): string {
-        // get an instance of configuration manager
-        let configInstance = ConfigManager.getInstance();
-
         if (this.rawText.text) {
             // split out the strings by provided pattern
-            const pattern = configInstance.pattern ? configInstance.pattern : SPACE_STRING;
+            const pattern = COMMA_STRING;
             let splitContent = this.rawText.text.split(pattern);
             if (splitContent.length == LENGTH_INT_0) {
                 throw new Error("The provided stream does not have a valid length");
@@ -45,7 +41,7 @@ export class WordTextCountDecorator extends TextDecorator {
 
             return parsedObject;
         } else {
-            throw new Error("No content found on stream");
+            return EMPTY_STRING;
         }
     }
 }

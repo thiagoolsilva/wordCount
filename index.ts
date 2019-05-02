@@ -3,19 +3,23 @@
  * All Rights Reserved.
  */
 
+import Minimist from "minimist";
+import { PlainTextSource } from "./source/impl/PlainTextSource";
 import { ConfigManager } from "./config/ConfigManager";
+import { ExtractBibRegex } from "./bibtext/ExtractBibRegex";
 
 async function main() {
     try {
-        // configure the program
-        let configInstance = ConfigManager.getInstance();
-        await configInstance.setup();
+        let argumentParameters = Minimist((process.argv.slice(2)));
+        let bibFilePath = argumentParameters.path;
+        let algoritmType = argumentParameters.algorithm;
 
-        if (configInstance.baseParse) {
-            let parseObjc = configInstance.baseParse.parse();
-            console.log(parseObjc);
+        if (bibFilePath) {
+            let configManager2 = new ConfigManager(new ExtractBibRegex(), new PlainTextSource());
+            let keywordObjc = await configManager2.startParse(algoritmType, bibFilePath);
+            console.log(JSON.stringify(keywordObjc));
         } else {
-            console.error("Algorith not found in configuration file");
+            throw Error("bibtext file not provided");
         }
     } catch (e) {
         console.error(e);

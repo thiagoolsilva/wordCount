@@ -11,13 +11,13 @@ import { WordNumberCountDecoractor } from "./decorator/WordNumberCountDecoractor
 
 export class TextFactory {
 
-    static createFactory(parseType: string, rawText: string): BaseTextParse | undefined {
+    static createFactory(parseType: string, rawText: string): BaseTextParse {
         if (parseType == WORD_COUNT_ALGORITH) {
             return new WordTextCountDecorator(new RawText(rawText));
         } else if (parseType == WORD_NUMBER_COUNT_ALGORITH) {
             return new WordNumberCountDecoractor(new RawText(rawText));
         } else {
-            return undefined;
+            return new WordTextCountDecorator(new RawText(rawText));;
         }
     }
 }
