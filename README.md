@@ -1,6 +1,6 @@
 ## Description
 I've created it to count all keywords from scientific paper using a .bibtext file.
-It will help you generating a output as a json contains all grouped words to be used in a quantitative analyse of paper.
+It will help you generating an output as a json contains all grouped words to be used in a quantitative analyse of paper.
 
 Ps: The installation is done by [npm](https://www.npmjs.com/)
 
