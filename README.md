@@ -22,7 +22,7 @@ Run the command `node build/index.js --path fullPathOfBibTextFile`
 > Example:
 `node build/index.js --path /home/thiagolsilva/Downloads/myCollection.bib`
 
-### 3. Analyse the output json
+### 3. Analyse the json output
 ```
 [
     {
