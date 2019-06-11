@@ -5,6 +5,6 @@
 
 export interface IExtractBibRegex {
     
-    extractKeywordWords(rawData?: string): string[] | null;
+    extractRawData(rawData?: string): string[] | null;
 
 }

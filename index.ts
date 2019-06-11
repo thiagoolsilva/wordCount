@@ -4,9 +4,7 @@
  */
 
 import Minimist from "minimist";
-import { PlainTextSource } from "./source/impl/PlainTextSource";
-import { ConfigManager } from "./config/ConfigManager";
-import { ExtractBibRegex } from "./bibtext/ExtractBibRegex";
+import { ConfigManagerFactory } from "./config/ConfigManagerFactory";
 
 async function main() {
     try {
@@ -15,8 +13,8 @@ async function main() {
         let algoritmType = argumentParameters.algorithm;
 
         if (bibFilePath) {
-            let configManager2 = new ConfigManager(new ExtractBibRegex(), new PlainTextSource());
-            let keywordObjc = await configManager2.startParse(algoritmType, bibFilePath);
+            let configManager = ConfigManagerFactory.createFactory(algoritmType);
+            let keywordObjc = await configManager.startParse(bibFilePath);
             console.log(JSON.stringify(keywordObjc));
         } else {
             throw Error("bibtext file not provided");

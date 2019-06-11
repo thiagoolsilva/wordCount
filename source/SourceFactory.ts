@@ -6,15 +6,17 @@
 
 import { ISourceReader } from "./ISourceReader";
 import { PlainTextSource } from "./impl/PlainTextSource";
-import { PLAIN_TEXT_SOURCE_TYPE } from "../utils/constants";
+import { WORD_COUNT_ALGORITH, WORD_NUMBER_COUNT_ALGORITH } from "../utils/constants";
 
 export class SourceFactory {
 
-    static createFactory(sourceType: string): ISourceReader | undefined {
-        if (sourceType === PLAIN_TEXT_SOURCE_TYPE) {
-            return new PlainTextSource();
+    static createFactory(algorithmType: string) {
+        if (algorithmType == WORD_COUNT_ALGORITH) {
+
+        } else if (algorithmType == WORD_NUMBER_COUNT_ALGORITH) {
+
         } else {
-            return undefined;
+            throw new Error("Algorithm not found.");
         }
     }
 }

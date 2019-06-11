@@ -6,11 +6,11 @@
 import { IExtractBibRegex } from "./IExtractBibRegex";
 import { EMPTY_STRING, LENGTH_INT_0 } from "../utils/constants";
 
-export class ExtractBibRegex implements IExtractBibRegex {
+export class KeywordExtractBibRegex implements IExtractBibRegex {
 
     private readonly ARTICLE_MARKDOWN = "@article";
 
-    extractKeywordWords(rawData?: string): string[] | null {
+    extractRawData(rawData?: string): string[] | null {
         var result: RegExpMatchArray | null = [];
         if (rawData) {
             let _ = require("underscore");
