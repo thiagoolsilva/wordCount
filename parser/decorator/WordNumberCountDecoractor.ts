@@ -32,7 +32,7 @@ export class WordNumberCountDecoractor extends TextDecorator {
                     // remove characters
                     return value.replace(new RegExp("[a-zA-Z]*", "g"), EMPTY_STRING);
                 })
-                .filter((value: string) => value !== EMPTY_STRING)
+                .filter( (value:string) => value && value !== EMPTY_STRING )
                 .reduce((value1: string, value2: string) => Number(value1) + Number(value2))
                 .value();
 

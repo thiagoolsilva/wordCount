@@ -4,31 +4,19 @@
  */
 
 import { IExtractBibRegex } from "./IExtractBibRegex";
-import { EMPTY_STRING, LENGTH_INT_0 } from "../utils/constants";
+import { Logging } from "../logging/Logging";
 
 export class KeywordExtractBibRegex implements IExtractBibRegex {
 
-    private readonly ARTICLE_MARKDOWN = "@article";
-
     extractRawData(rawData?: string): string[] | null {
-        var result: RegExpMatchArray | null = [];
+        var result: string[] = [];
         if (rawData) {
-            let _ = require("underscore");
-            let articles = rawData.split(this.ARTICLE_MARKDOWN);
-            let keywords = _.chain(articles)
-                .filter((value: string) => value !== EMPTY_STRING)
-                .map((value: string) => {
-                    let regex = /(?<=keywords = \{)(.*?)(?=})/gim;
-                    let normalizedStr = value.replace(/(\r\n|\n|\r)/gim, EMPTY_STRING)
-                    let resultStr = regex.exec(normalizedStr);
-                    return resultStr && resultStr.length > LENGTH_INT_0 ? resultStr[LENGTH_INT_0] : EMPTY_STRING;
-                })
-                .filter((value: string) => value !== EMPTY_STRING)
-                .value();
+            var bibtexParse = require('bibtex2json');
+            var keywordsResultSet = bibtexParse.toJSON(rawData).map((value: any) => { return value.entryTags.keywords });
 
-            if(keywords && keywords.length > LENGTH_INT_0) {
-                result.push(keywords);
-            }
+            Logging.simpleLog(`keywordsResultSet=>${keywordsResultSet}`);
+
+            result.push(keywordsResultSet);
         }
         return result as string[];
     }

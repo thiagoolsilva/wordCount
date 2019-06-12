@@ -10,12 +10,15 @@
   "author": "Thiago Lopes da Silva",
   "license": "Copyright (c) 2019  Thiago Lopes da Silva",
   "dependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/minimist": "^1.2.0",
     "@types/node": "^11.13.7",
     "@types/properties-reader": "0.0.1",
+    "bibtex2json": "0.1.0-1",
+    "dotenv": "^8.0.0",
     "fs": "0.0.1-security",
     "minimist": "^1.2.0",
-    "underscore": "^1.9.1",
-    "@types/minimist": "^1.2.0",
-    "typescript": "^3.4.5"
+    "typescript": "^3.4.5",
+    "underscore": "^1.9.1"
   }
 }

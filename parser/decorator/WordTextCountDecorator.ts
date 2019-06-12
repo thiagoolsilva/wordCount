@@ -27,7 +27,7 @@ export class WordTextCountDecorator extends TextDecorator {
                 .chain(splitContent)
                 // remove any special characters, white spaces and transform the stream to lower case
                 .map((value: string) => value.toLowerCase().trim().replace(/[^\w\s]/gi, ''))
-                .filter( (value:string) => value !== EMPTY_STRING)
+                .filter( (value:string) => value && value !== EMPTY_STRING )
                 // count all found words
                 .countBy()
                 // transform the objects to a custom one
