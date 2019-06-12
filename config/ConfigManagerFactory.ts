@@ -17,8 +17,7 @@ export class ConfigManagerFactory {
      * @returns an instance of configManager
      */
     static createFactory(algorithmType: string): ConfigManager {
-        if (algorithmType == WORD_COUNT_ALGORITH
-            || algorithmType == WORD_NUMBER_COUNT_ALGORITH) {
+        if (algorithmType == WORD_COUNT_ALGORITH) {
             return new ConfigManagerBuilder()
                 .setAlgoritmType(algorithmType)
                 .setBibTextAlgoritm(new KeywordExtractBibRegex())

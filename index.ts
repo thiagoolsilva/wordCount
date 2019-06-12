@@ -5,6 +5,7 @@
 
 import Minimist from "minimist";
 import { ConfigManagerFactory } from "./config/ConfigManagerFactory";
+import { Logging } from "./logging/Logging";
 
 async function main() {
     try {
@@ -20,7 +21,8 @@ async function main() {
             throw Error("bibtext file not provided");
         }
     } catch (e) {
-        console.error(e);
+        console.log("An unexpected error happened.")
+        Logging.simpleLog(`${e.stack}`)
     }
 }
 
