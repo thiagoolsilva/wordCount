@@ -4,12 +4,12 @@
  */
 
 import { RawText } from "./RawText";
-import { SPACE_STRING, LENGTH_INT_0, EMPTY_STRING, COMMA_STRING } from "../../utils/constants";
+import { LENGTH_INT_0, EMPTY_STRING, COMMA_STRING } from "../../utils/constants";
 import { TextDecorator } from "./TextDecorator";
 
 export class WordNumberCountDecoractor extends TextDecorator {
 
-    constructor(rawText:RawText){
+    constructor(rawText: RawText) {
         super(rawText);
     }
 
@@ -32,7 +32,7 @@ export class WordNumberCountDecoractor extends TextDecorator {
                     // remove characters
                     return value.replace(new RegExp("[a-zA-Z]*", "g"), EMPTY_STRING);
                 })
-                .filter( (value:string) => value && value !== EMPTY_STRING )
+                .filter((value: string) => value && value !== EMPTY_STRING)
                 .reduce((value1: string, value2: string) => Number(value1) + Number(value2))
                 .value();
 

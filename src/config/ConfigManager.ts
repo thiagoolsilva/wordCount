@@ -21,8 +21,12 @@ export class ConfigManager {
         this.algorithmType = builder.algoritmType();
     }
 
+    /**
+     * Start to parse the provided bibtext file
+     * @param bibFilePath bibFilePath
+     */
     async startParse(bibFilePath: string): Promise<any> {
-        // configure all keywords properties found by provided bibtext file
+        // configure all keywords properties found on provided bibtext file
         await this.configureKeywordsFile(bibFilePath);
 
         // Execute the parse algorithm
@@ -34,9 +38,13 @@ export class ConfigManager {
         this.sourceReader.deleteFile();
 
         // return the algoritm result to client
-        return algorithmResult ? algorithmResult : "No word found by provided file";
+        return algorithmResult ? algorithmResult : "No word found on provided file";
     }
 
+    /**
+     * Get all keywords from provided bibTextFile
+     * @param bibFilePath bibFilePath
+     */
     private async configureKeywordsFile(bibFilePath: string) {
         let rawData = await this.sourceReader.rawStream(bibFilePath);
         let keywords = this.bibTextManager.extractRawData(rawData);

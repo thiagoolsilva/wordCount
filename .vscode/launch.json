@@ -8,24 +8,13 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program with collection.bib",
-            "program": "${workspaceFolder}/build/index.js",
+            "program": "${workspaceFolder}/build/src/index.js",
             "outFiles": [
                 "${workspaceFolder}/out/**/*.js"
             ],
             "args": [
-                "--path", "/home/thiagolsilva/Downloads/collection.bib"
-             ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program with fakeTest file",
-            "program": "${workspaceFolder}/build/index.js",
-            "outFiles": [
-                "${workspaceFolder}/out/**/*.js"
-            ],
-            "args": [
-                "--path", "/home/thiagolsilva/Downloads/fakeFile.txt"
+                "--path", "/home/thiagolsilva/Downloads/collection.bib",
+                "--algorithm", "wordCount",
              ]
         }
     ]

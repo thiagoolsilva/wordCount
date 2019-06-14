@@ -5,7 +5,7 @@
 
 import { ConfigManagerBuilder } from "./ConfigManagerBuilder";
 import { KeywordExtractBibRegex } from "../bibtext/KeywordExtractBibRegex";
-import { WORD_COUNT_ALGORITH, WORD_NUMBER_COUNT_ALGORITH, YEAR_COUNT_ALGORITHM } from "../utils/constants";
+import { WORD_COUNT_ALGORITH, YEAR_COUNT_ALGORITHM } from "../utils/constants";
 import { YearExtractBibgRegex } from "../bibtext/YearExtractBibgRegex";
 import { ConfigManager } from "./ConfigManager";
 

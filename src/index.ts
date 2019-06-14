@@ -21,8 +21,8 @@ async function main() {
             throw Error("bibtext file not provided");
         }
     } catch (e) {
-        console.log("An unexpected error happened.")
-        Logging.simpleLog(`${e.stack}`)
+        console.log("An unexpected error happened.");
+        Logging.simpleLog(`${e.stack}`);
     }
 }
 

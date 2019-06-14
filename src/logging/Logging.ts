@@ -9,6 +9,11 @@ export class Logging {
 
     private static readonly DEFAULT_TAG = ">>> wordCount-log-tag";
 
+    /**
+     * Print out a log with provided tag and message
+     * @param tag tag
+     * @param message message
+     */
     static log(tag: string, message: string): void {
         config();
         const isDebugMode = process.env.DEBUG || "false";
@@ -18,6 +23,10 @@ export class Logging {
         }
     }
 
+    /**
+     * Print out a log with provided message
+     * @param message message
+     */
     static simpleLog(message: string): void {
         this.log(this.DEFAULT_TAG, message);
     }

@@ -8,15 +8,17 @@ import { Logging } from "../logging/Logging";
 
 export class KeywordExtractBibRegex implements IExtractBibRegex {
 
-    extractRawData(rawData?: string): string[] | null {
+    extractRawData(rawData?: string): string[] {
         var result: string[] = [];
         if (rawData) {
             var bibtexParse = require('bibtex2json');
-            var keywordsResultSet = bibtexParse.toJSON(rawData).map((value: any) => { return value.entryTags.keywords });
-
+            var keywordsResultSet = bibtexParse.toJSON(rawData)
+                .filter((value: any) => value.entryTags.keywords)
+                .map((value: any) => { return value.entryTags.keywords });
+            if (keywordsResultSet.length) {
+                result.push(keywordsResultSet);
+            }
             Logging.simpleLog(`keywordsResultSet=>${keywordsResultSet}`);
-
-            result.push(keywordsResultSet);
         }
         return result as string[];
     }
