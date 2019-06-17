@@ -37,6 +37,18 @@ describe("Testing WordTextCountDecorator file", () => {
         const objctResultset = JSON.parse(strfResultSet);
         expect(objctResultset[0].test2).to.be.equal(1);
         expect(objctResultset[1].test).to.be.equal(1);
-    });   
+    });
+
+    it("with grouped string", () => {
+        const classUnderTest = new WordTextCountDecorator(new RawText("test, test, test2"));
+        let resultSet = classUnderTest.parse();
+
+        expect(resultSet).to.be.not.empty;
+
+        const strfResultSet = JSON.stringify(resultSet);
+        const objctResultset = JSON.parse(strfResultSet);
+        expect(objctResultset[0].test).to.be.equal(2);
+        expect(objctResultset[1].test2).to.be.equal(1);
+    });
 
 });

@@ -31,8 +31,6 @@ export class PlainTextSource implements ISourceReader {
         let rawFilePath = filePath ? filePath : this.TEMP_FILE_PATH;
         const rawData = new FileManager(rawFilePath).readAsyncContentFromFile();
 
-        console.log("as")
-
         return rawData;
     }
 

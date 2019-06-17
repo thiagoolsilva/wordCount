@@ -8,6 +8,7 @@ import { KeywordExtractBibRegex } from "../bibtext/KeywordExtractBibRegex";
 import { WORD_COUNT_ALGORITH, YEAR_COUNT_ALGORITHM } from "../utils/constants";
 import { YearExtractBibgRegex } from "../bibtext/YearExtractBibgRegex";
 import { ConfigManager } from "./ConfigManager";
+import { NoAlgorithmFound } from "../error/NoAlgorithFound";
 
 export class ConfigManagerFactory {
 
@@ -28,7 +29,7 @@ export class ConfigManagerFactory {
                 .setBibTextAlgoritm(new YearExtractBibgRegex())
                 .build();
         } else {
-            throw new Error("Algoritm not found.")
+            throw new NoAlgorithmFound("Algoritm not found. Please check the documentation for more details.")
         }
     }
 

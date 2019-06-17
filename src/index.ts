@@ -6,6 +6,7 @@
 import Minimist from "minimist";
 import { ConfigManagerFactory } from "./config/ConfigManagerFactory";
 import { Logging } from "./logging/Logging";
+import { NoAlgorithmFound } from "./error/NoAlgorithFound";
 
 async function main() {
     try {
@@ -16,13 +17,18 @@ async function main() {
         if (bibFilePath) {
             let configManager = ConfigManagerFactory.createFactory(algoritmType);
             let keywordObjc = await configManager.startParse(bibFilePath);
-            console.log(JSON.stringify(keywordObjc));
+            console.log(`Algoritm = ${algoritmType}`)
+            console.log(`Result = ${JSON.stringify(keywordObjc)}`);
         } else {
-            throw Error("bibtext file not provided");
+            throw Error("Bibtext file not provided");
         }
     } catch (e) {
-        console.log("An unexpected error happened.");
         Logging.simpleLog(`${e.stack}`);
+        if (e instanceof NoAlgorithmFound) {
+            console.log(e.message);
+        } else {
+            console.log("An unexpected error happened.");
+        }
     }
 }
 
