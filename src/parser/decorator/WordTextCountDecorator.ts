@@ -18,9 +18,7 @@ export class WordTextCountDecorator extends TextDecorator {
             // split out the strings by provided pattern
             const pattern = COMMA_STRING;
             let splitContent = this.rawText.text.split(pattern);
-            if (splitContent.length == LENGTH_INT_0) {
-                throw new Error("The provided stream does not have a valid length");
-            }
+
             // group all worlds by its content
             let _ = require("underscore");
             let parsedObject = _

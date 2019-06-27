@@ -18,7 +18,9 @@
     ],
     "exclude": [
       "**/*.d.ts",
-      "**/ISourceReader.ts"
+      "**/ISourceReader.ts",
+      "**/index.ts",
+      "**/test/*"
     ],
     "reporter": [
       "html"

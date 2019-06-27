@@ -18,7 +18,6 @@ export const PLAIN_TEXT_SOURCE_TYPE = "plaintext";
 
 // supported algorith
 export const WORD_COUNT_ALGORITH = "wordCount";
-export const WORD_NUMBER_COUNT_ALGORITH = "numberCount";
 export const YEAR_COUNT_ALGORITHM = "yearCount";
 
 // string values
