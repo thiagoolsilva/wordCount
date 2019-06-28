@@ -9,7 +9,8 @@
     "build": "tsc ",
     "buid:development": "tsc -W",
     "test": "mocha --require ts-node/register test/**/*.ts",
-    "test:coverage": "rm -rf build/ coverage/ && tsc && nyc mocha build/test/"
+    "test:coverage": "tsc && nyc mocha build/test/",
+    "test:normalize": "rm -rf ./node_modules/.cache"
   },
   "nyc": {
     "extension": [
@@ -20,7 +21,8 @@
       "**/*.d.ts",
       "**/ISourceReader.ts",
       "**/index.ts",
-      "**/test/*"
+      "**/test/*",
+      "**/coverage/*"
     ],
     "reporter": [
       "html"
