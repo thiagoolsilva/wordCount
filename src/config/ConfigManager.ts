@@ -7,36 +7,47 @@ import { ISourceReader } from "../source/ISourceReader";
 import { IExtractBibRegex } from "../bibtext/IExtractBibRegex";
 import { LENGTH_INT_0, COMMA_STRING } from "../utils/constants";
 import { TextFactory } from "../parser/TextFactory";
+import { ConfigManagerBuilder } from "./ConfigManagerBuilder";
 
 export class ConfigManager {
 
-    private bibTextManager: IExtractBibRegex;
-    private sourceReader: ISourceReader;
+    private readonly bibTextManager: IExtractBibRegex;
+    private readonly sourceReader: ISourceReader;
+    private readonly algorithmType: string;
 
-    constructor(bibTextManager: IExtractBibRegex, sourceReader: ISourceReader) {
-        this.bibTextManager = bibTextManager;
-        this.sourceReader = sourceReader;
+    constructor(builder: ConfigManagerBuilder) {
+        this.bibTextManager = builder.bibTextAlgoritm();
+        this.sourceReader = builder.sourceType();
+        this.algorithmType = builder.algoritmType();
     }
 
-    async startParse(algorithType: string, bibFilePath: string): Promise<any> {
-        // configure all keywords properties found by provided bibtext file
+    /**
+     * Start to parse the provided bibtext file
+     * @param bibFilePath bibFilePath
+     */
+    async startParse(bibFilePath: string): Promise<any> {
+        // configure all keywords properties found on provided bibtext file
         await this.configureKeywordsFile(bibFilePath);
 
         // Execute the parse algorithm
         let rawData = await this.sourceReader.rawStream();
-        let algorith = TextFactory.createFactory(algorithType, rawData);
+        let algorith = TextFactory.createFactory(this.algorithmType, rawData);
         let algorithmResult = algorith.parse();
 
         // delete the cache file
         this.sourceReader.deleteFile();
 
         // return the algoritm result to client
-        return algorithmResult ? algorithmResult : "No word found by provided file";
+        return algorithmResult ? algorithmResult : "No word found on provided file";
     }
 
+    /**
+     * Get all keywords from provided bibTextFile
+     * @param bibFilePath bibFilePath
+     */
     private async configureKeywordsFile(bibFilePath: string) {
         let rawData = await this.sourceReader.rawStream(bibFilePath);
-        let keywords = this.bibTextManager.extractKeywordWords(rawData);
+        let keywords = this.bibTextManager.extractRawData(rawData);
 
         //save extracted keywords to temp file
         if (keywords && keywords.length > LENGTH_INT_0) {

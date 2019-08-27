@@ -12,6 +12,10 @@ export class PlainTextSource implements ISourceReader {
 
     private readonly TEMP_FILE_PATH = "cache_result.txt";
 
+    /**
+     * Delete the provided file
+     * @param filePath filePath
+     */
     deleteFile(filePath?: string): void {
         let rawFilePath = filePath ? filePath : this.TEMP_FILE_PATH;
         if(fs.existsSync(rawFilePath)) {
@@ -19,6 +23,10 @@ export class PlainTextSource implements ISourceReader {
         }
     }
 
+    /**
+     * Read async the content of provided file
+     * @param filePath filePath
+     */
     rawStream(filePath?: string): Promise<string> {
         let rawFilePath = filePath ? filePath : this.TEMP_FILE_PATH;
         const rawData = new FileManager(rawFilePath).readAsyncContentFromFile();
@@ -26,6 +34,9 @@ export class PlainTextSource implements ISourceReader {
         return rawData;
     }
 
+    /**
+     * Write down the content on file
+     */
     writteToFile(data: string, filepath?: string): void {
         let rawFilePath = filepath ? filepath : this.TEMP_FILE_PATH;
         if (!fs.existsSync(rawFilePath)) {
