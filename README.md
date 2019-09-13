@@ -20,7 +20,7 @@ Execute the command `npm run build`
 ### 2. Running the project
 Run the command `node build/index.js --path fullPathOfBibTextFile`
 > Example:
-`node build/index.js --path /home/thiagolsilva/Downloads/myCollection.bib`
+`node  build/src/index.js --algorithm wordCount --path fullPath/collection.bib`
 
 ### 3. Analyse the json output
 ```
