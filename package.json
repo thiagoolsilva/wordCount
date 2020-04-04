@@ -45,7 +45,7 @@
     "bibtex2json": "0.1.0-1",
     "dotenv": "^8.0.0",
     "fs": "0.0.1-security",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.3",
     "typescript": "^3.5.1",
     "underscore": "^1.9.1"
   },
